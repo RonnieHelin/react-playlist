@@ -3,6 +3,11 @@ import './App.css';
 
 let defaultStyle = {
   color: '#FFF'
+};
+let fakeServerData = {
+  user: {
+    name: 'David'
+  }
 }
 
 class Aggregate extends Component {
@@ -40,10 +45,20 @@ class Playlist extends Component {
 }
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {serverData: {}}
+  }
+  componentDidMount() {
+    this.setState({serverData: fakeServerData});
+  }
   render() {
     return (
       <div className="App">
-        <h1 style={{...defaultStyle, 'font-size': '54px'}}>Title</h1>
+        <h1 style={{...defaultStyle, 'font-size': '54px'}}>
+          {this.state.serverData.user &&
+           this.state.serverData.user.name}'s Playlists
+        </h1>
         <Aggregate/>
         <Aggregate/>
         <Filter/>
